@@ -1,0 +1,43 @@
+<!-- page title -->
+<section class="page-title-section overlay" style="background-image: url('assets/images/backgrounds/bg_1.jpg')">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-8">
+          <ul class="list-inline custom-breadcrumb">
+            <li class="list-inline-item"><a class="h2 text-primary font-secondary" >LOGIN</a></li>
+    
+          </ul>
+          <p class="text-lighten">Our courses offer a good compromise between the continuous assessment favoured by some universities and the emphasis placed on final exams by others.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- /page title -->
+<div  tabindex="-1" aria-hidden="true">
+    <div  class="modal-dialog modal-lg" role="document" >
+        <div class="modal-content rounded-0 border-0 p-4">
+            <div class="modal-header border-0">
+                <h3>Login</h3>
+               
+            </div>
+            <div class="modal-body">
+                <form  class="row" #loginForm="ngForm" (ngSubmit)="login()">
+                    <div class="col-12">
+                        <input type="text" class="form-control mb-3" [(ngModel)]="user.tel" [ngModelOptions]="{standalone:true}"  name="loginPhone" placeholder="Phone">
+                    </div>
+                    
+                    <div class="col-12">
+                        <input type="password" class="form-control mb-3" [(ngModel)]="user.pwd" [ngModelOptions]="{standalone:true}"  name="loginPassword" placeholder="Password">
+                    </div>
+                    <div class="col-12">
+                        <button type="submit" class="btn btn-primary" >LOGIN</button>
+                    </div>
+                </form>
+                <div style="color: red;"> {{msg}}</div>
+                <br><br>
+                <div class="text-center"><a>Forgot password?</a></div>
+                
+            </div>
+        </div>
+    </div>
+</div>

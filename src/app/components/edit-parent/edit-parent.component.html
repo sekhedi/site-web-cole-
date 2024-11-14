@@ -1,0 +1,66 @@
+<!-- page title -->
+<section class="page-title-section overlay" data-background="assets/images/backgrounds/page-title.jpg">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8">
+                <ul class="list-inline custom-breadcrumb">
+                    <li class="list-inline-item"><a class="h2 text-primary font-secondary" >EDIT Parent</a></li>
+
+                </ul>
+               
+            </div>
+        </div>
+    </div>
+</section>
+<!-- /page title -->
+<div tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content rounded-0 border-0 p-4">
+            <div class="modal-header border-0">
+                <h3>Edit Parent</h3>
+
+            </div>
+            <div class="modal-body">
+                <div class="login">
+                    <form action="#" class="row" #parentForm="ngForm" (ngSubmit)="editParent()">
+
+                        <div class="col-12">
+                            <input type="text" class="form-control mb-3"  [(ngModel)]="parent.firstName" [ngModelOptions]="{standalone:true}" name="signupFName"  placeholder="FirstName">
+                    
+                        </div>
+                        <div class="col-12">
+                            <input type="text" class="form-control mb-3"  [(ngModel)]="parent.lastName" [ngModelOptions]="{standalone:true}" name="signupLName" placeholder="LastName">
+                            
+                        </div>
+                        <div class="col-12">
+                            <input type="email" class="form-control mb-3" [(ngModel)]="parent.email" [ngModelOptions]="{standalone:true}"  name="signupEmail" placeholder="Email">
+                            
+                        </div>
+                        <div class="col-12">
+                            <input type="text" class="form-control mb-3" [(ngModel)]="parent.tel" [ngModelOptions]="{standalone:true}"  name="signupPhone" placeholder="Phone">
+                            
+                        </div>
+                        <div class="col-12">
+                            <input type="text" class="form-control mb-3"[(ngModel)]="parent.adress" [ngModelOptions]="{standalone:true}" name="signupAdress"  placeholder="Adress">
+                            
+                        </div>
+                        
+                       
+                        
+                        <div class="col-12" style="display:none;">
+                            <input type="file" class="form-control mb-3" #filePicker (change)="selectFile($event)">
+                        </div>
+                        <div class="col-12 text-center ">
+                            <button type="button" class="btn btn-primary" (click)="filePicker.click()">select your
+                                photo</button>
+                        </div>
+
+                        <div class="col-12">
+                            <button id="submit" type="submit" class="btn btn-primary">EDIT</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

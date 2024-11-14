@@ -1,0 +1,53 @@
+<!-- page title -->
+<section class="page-title-section overlay" style="background-image: url('assets/images/backgrounds/bg_1.jpg')">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-8">
+        <ul class="list-inline custom-breadcrumb">
+          <li class="list-inline-item"><a class="h2 text-primary font-secondary" href="@@page-link">Our teacher</a></li>
+          <li class="list-inline-item text-white h3 font-secondary @@nasted"></li>
+        </ul>
+        <p class="text-lighten">Our courses offer a good compromise between the continuous assessment favoured by some universities and the emphasis placed on final exams by others.</p>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- /page title -->
+<!-- teachers -->
+<section class="section">
+  <div data-ref="mixitup-target" class="container">
+    <div class="row">
+      <div class="col-12">
+        <!-- teacher category list -->
+        <ul class="list-inline text-center filter-controls mb-5" >
+          <li class="list-inline-item m-3 text-uppercase" data-filter=".arts" *ngFor="let c of coursesTab">{{c.name}}</li>
+          
+        </ul>
+      </div>
+    </div>
+    <!-- teacher list -->
+    <div class="row" data-ref="mixitup-container">
+      <!-- teacher -->
+      <div data-ref="mixitup-target" class="col-lg-4 col-sm-6 mb-5 arts law" *ngFor="let t of teachersTab">
+        <div class="card border-0 rounded-0 hover-shadow">
+          <img class="card-img-top rounded-0" src="{{t.avatar}}" alt="teacher">
+          <div class="card-body">
+            <a routerLink="/teacherDetails/{{t._id}}">
+              <h4 class="card-title">{{t.firstName}}</h4>
+            </a>
+            <p>{{t.role}}</p>
+            <div class="col-12">
+              <!-- teacher category list -->
+              <ul class="list-inline text-center filter-controls mb-5" >
+                <li class="list-inline-item m-3 text-uppercase" data-filter=".arts" *ngFor="let elt of t.courses">{{elt.name}}</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- teacher -->
+     
+    </div>
+  </div>
+</section>
+<!-- /teachers -->

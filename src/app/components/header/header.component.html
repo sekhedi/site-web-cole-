@@ -1,0 +1,109 @@
+  <!-- header -->
+  <header class="fixed-top header">
+    <!-- top header -->
+    <div class="top-header py-2 bg-white">
+      <div class="container">
+        <div class="row no-gutters">
+          <div class="col-lg-4 text-center text-lg-left">
+            <a class="text-color mr-3" href="callto:+443003030266"><strong>CALL</strong> +44 300 303 0266</a>
+            <ul class="list-inline d-inline">
+              <li class="list-inline-item mx-0"><a class="d-inline-block p-2 text-color" href="#"><i class="ti-facebook"></i></a></li>
+              <li class="list-inline-item mx-0"><a class="d-inline-block p-2 text-color" href="#"><i class="ti-twitter-alt"></i></a></li>
+              <li class="list-inline-item mx-0"><a class="d-inline-block p-2 text-color" href="#"><i class="ti-linkedin"></i></a></li>
+              <li class="list-inline-item mx-0"><a class="d-inline-block p-2 text-color" href="#"><i class="ti-instagram"></i></a></li>
+            </ul>
+          </div>
+          <div class="col-lg-8 text-center text-lg-right">
+            <ul class="list-inline">
+              
+              <li *ngIf="isloggedIn() &&(user.role=='parent') " class="list-inline-item"><input type="text" class="text-uppercase text-color p-sm-2 py-2 px-0 d-inline-block" >search</li>
+          
+              <li *ngIf="!isloggedIn()" class="list-inline-item"><a class="text-uppercase text-color p-sm-2 py-2 px-0 d-inline-block" routerLink="login">login</a></li>
+              <li *ngIf="!isloggedIn()"  class="list-inline-item"><a class="text-uppercase text-color p-sm-2 py-2 px-0 d-inline-block" routerLink="registerActor" >register</a></li>
+              <li *ngIf="isloggedIn() "  class="list-inline-item"><a class="text-uppercase text-color p-sm-2 py-2 px-0 d-inline-block"  >
+                <img width="50px" height="50px" style="border-radius:60%;" src="{{user.img}}" class="logo"></a></li>
+              <li *ngIf="isloggedIn()"  class="list-inline-item"><a class="text-uppercase text-color p-sm-2 py-2 px-0 d-inline-block"  >{{user.firstName}}</a></li>
+              <li *ngIf="isloggedIn()"  class="list-inline-item"><a class="text-uppercase text-color p-sm-2 py-2 px-0 d-inline-block" routerLink="registerAdmin" (click)="logout()" >logout</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- navbar -->
+    <div class="navigation w-100">
+      <div class="container">
+        <nav class="navbar navbar-expand-lg navbar-light p-0">
+          <a class="navbar-brand "><img src="assets/images/logo.png" alt="logo" class="logo"  ></a>
+          <button class="navbar-toggler rounded-0" type="button" data-toggle="collapse" data-target="#navigation"
+            aria-controls="navigation" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+  
+          <div class="collapse navbar-collapse" id="navigation">
+            <ul class="navbar-nav ml-auto text-center">
+              <li class="nav-item active">
+                <a class="nav-link" routerLink="">Home</a>
+              </li>
+              
+              <li class="nav-item @@courses">
+                <a class="nav-link" routerLink="courses">COURSES</a>
+              </li>
+              <li class="nav-item @@courses">
+                <a class="nav-link" routerLink="teacher">TEACHER</a>
+              </li>
+              <li class="nav-item @@events">
+                <a class="nav-link" routerLink="events">EVENTS</a>
+              </li>
+              
+              <li *ngIf="isloggedIn() && user.role=='admin'" class="nav-item dropdown view" >
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  DASHBOARD 
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                  <a class="dropdown-item" routerLink="tabTeacher">tabTeachers</a>
+                  <a class="dropdown-item"  routerLink="tabStudent">tabStudents</a>
+                  <a class="dropdown-item"  routerLink="tabParent">tabParents</a>
+                  <a class="dropdown-item" routerLink="tabCourse">tabCourses</a>
+                  <a class="dropdown-item" routerLink="tabUser">tabUsers</a>
+                </div>
+              </li>
+              <li *ngIf="isloggedIn() && user.role=='teacher'" class="nav-item dropdown view" >
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  DASHBOARD 
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                  <a class="dropdown-item"  routerLink="tabStudent">tabStudents</a>
+                  <a class="dropdown-item" routerLink="tabCourse">tabCourses</a>
+                </div>
+              </li>
+              <li *ngIf="isloggedIn() && user.role=='parent'" class="nav-item dropdown view" >
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  DASHBOARD 
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                  <a class="dropdown-item"  routerLink="tabStudent">tabStudents</a>
+                  <a class="dropdown-item" routerLink="tabCourse">tabCourses</a>
+                  <a class="dropdown-item" routerLink="tabAbsence">tabAbsence</a>
+                  <a class="dropdown-item"  routerLink="tabNote">tabNote</a>
+                </div>
+              </li>
+              <li *ngIf="isloggedIn() && user.role=='student'" class="nav-item dropdown view" >
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  DASHBOARD 
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                  <a class="dropdown-item"  routerLink="tabNote">tabNote</a>
+                  <a class="dropdown-item" routerLink="tabCourse">tabCourses</a>
+                  
+                </div>
+              </li>
+              <li class="nav-item @@contact">
+                <a class="nav-link" routerLink="contact" >CONTACT</a>
+              </li>
+            </ul>
+          </div>
+        </nav>
+      </div>
+    </div>
+  </header>
+  <!-- /header -->

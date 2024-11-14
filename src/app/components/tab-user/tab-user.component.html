@@ -1,0 +1,70 @@
+<!-- page title -->
+<section class="page-title-section overlay" data-background="assets/images/backgrounds/page-title.jpg">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8">
+                <ul class="list-inline custom-breadcrumb">
+                    <li class="list-inline-item"><a class="h2 text-primary font-secondary" href="@@page-link">Our
+                            users</a></li>
+                    <li class="list-inline-item text-white h3 font-secondary @@nasted"></li>
+                </ul>
+
+            </div>
+        </div>
+    </div>
+</section>
+<!-- /page title -->
+<!-- users -->
+
+<section class="section">
+    <div data-ref="mixitup-target" class="container">
+        <div class="row">
+          <form action="#" class="row" [formGroup]="searchForm">
+            <div class="col-12">
+                <div class="d-flex align-items-center section-title justify-content-between">
+                    <h2 class="mb-0 text-nowrap mr-3"></h2>
+                    <div class="border-top w-100 border-primary d-none d-sm-block"></div>
+                    <div>
+                        <input type="text" class="btn btn-sm btn-primary-outline   d-none d-sm-block" formControlName="search" name="searchFName" placeholder="" style="background-color:white;">
+                         <div *ngIf="searchForm.controls['search'].invalid && (searchForm.controls['search'].dirty||
+                             searchForm.controls['search'].touched)">
+                            <div *ngIf="searchForm.controls['search'].errors?.['required']" >search is required!</div>
+                        </div>
+                    </div>
+                    <div> 
+                        <button type="submit" class="btn btn-sm btn-primary-outline   d-none d-sm-block" (click)="searchUser()">search</button> 
+                    </div>
+                    
+                </div>
+            </div>
+           </form>
+        </div>
+        <!-- user list -->
+        <div class="row" data-ref="mixitup-container">
+            <!-- user -->
+            <div data-ref="mixitup-target" class="col-lg-4 col-sm-6 mb-5 arts law" *ngFor="let t of usersTab">
+                <div class="card border-0 rounded-0 hover-shadow">
+                    <img class="card-img-top rounded-0" src="{{t.avatar}}" alt="teacher">
+                    <div class="card-body">
+                                <h4 class="card-title">{{t.firstName}}</h4>
+                                
+                                <p>{{t.role}}</p>
+                                <p>{{t.adress}}</p>
+                                <div *ngIf="t.role=='teacher'" class="btn-group btn-group-sm">
+                                    <button type="submit" class="btn btn-dark" (click)="validateUser(t._id)" >{{t.status}}</button>
+                                </div>
+                                <br><br><br><br>
+                                <div class="btn-group btn-group-sm">
+                                    <button type="button" class="btn btn-info logo"(click)="goToInfo(t._id)">DISPLAY</button>
+                                    <button type="button" class="btn btn-success" (click)="goToEdit(t._id)">EDIT</button>
+                                    <button type="button" class="btn btn-danger" (click)="deleteUser(t._id)">DELETE</button>
+                                    
+                                </div>
+                    </div>
+                </div>
+            </div>
+            <!--user -->
+        </div>
+    </div>
+</section>
+<!-- /users -->

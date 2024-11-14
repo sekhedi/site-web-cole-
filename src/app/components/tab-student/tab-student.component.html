@@ -1,0 +1,70 @@
+<!-- page title -->
+<section class="page-title-section overlay" data-background="assets/images/backgrounds/page-title.jpg">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-8">
+          <ul class="list-inline custom-breadcrumb">
+            <li class="list-inline-item"><a class="h2 text-primary font-secondary" href="@@page-link">Our students</a></li>
+            <li class="list-inline-item text-white h3 font-secondary @@nasted"></li>
+          </ul>
+          
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- /page title -->
+  <!-- students -->
+  
+  <section class="section">
+    <div data-ref="mixitup-target" class="container">
+      <div class="row">
+        <form action="#" class="row" [formGroup]="searchForm">
+          <div class="col-12">
+            <div class="d-flex align-items-center section-title justify-content-between">
+              <h2 class="mb-0 text-nowrap mr-3"></h2>
+              <div class="border-top w-100 border-primary d-none d-sm-block"></div>
+              <div><input type="text" class="btn btn-sm btn-primary-outline   d-none d-sm-block"  placeholder="" style="background-color:white;"></div>
+              <div> <button type="submit" class="btn btn-sm btn-primary-outline   d-none d-sm-block" (click)="searchStudent()">search</button> </div>
+              <div><a routerLink="/addStudent" class="btn btn-sm btn-primary-outline ml-sm-3  d-none d-sm-block">Add Student</a></div>
+            </div>
+          </div>
+        </form>
+        
+      </div>
+      <!-- student list -->
+      <div class="row" data-ref="mixitup-container">
+        <!-- student -->
+        <div data-ref="mixitup-target" class="col-lg-4 col-sm-6 mb-5 arts law" *ngFor="let t of studentsTab">
+          <div class="card border-0 rounded-0 hover-shadow">
+            <img class="card-img-top rounded-0" src="{{t.avatar}}" alt="teacher" >
+            <div class="card-body">
+              <a routerLink="studentDetails">
+                <h4 class="card-title">{{t.firstName}}</h4>
+              </a>
+              <p>{{t.role}}</p>
+              <div class="col-12">
+                <!-- student category list -->
+                <ul class="list-inline text-center filter-controls mb-5" >
+                  <li class="list-inline-item m-3 text-uppercase" data-filter=".arts" *ngFor="let elt of t.courses">{{elt.name}}</li>
+                </ul>
+                <ul class="list-inline text-center filter-controls mb-5" >
+                    <li class="list-inline-item m-3 text-uppercase" data-filter=".arts" *ngFor="let elt of t.users">{{elt.name}}</li>
+                </ul>
+              </div>
+              
+              <div class="btn-group btn-group-sm">
+                <button type="button" class="btn btn-success" (click)="goToInfo(t._id)">DISPLAY</button>
+                <button type="button" class="btn btn-info" (click)="goToEdit(t._id)">EDIT</button>
+                <button type="button" class="btn btn-danger" (click)="deleteStudent(t._id)">DELETE</button>
+                <button type="button" class="btn btn-warning" (click)="goToAdd()">ADD</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- student -->
+       
+      </div>
+    </div>
+  </section>
+  <!-- /students -->
+  
