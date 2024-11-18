@@ -41,6 +41,8 @@ import { UserDetailsComponent } from './components/user-details/user-details.com
 import { EditUserComponent } from './components/edit-user/edit-user.component';
 import { AddUserComponent } from './components/add-user/add-user.component';
 import { RegisterActorComponent } from './components/register-actor/register-actor.component';
+import { ForgetpassComponent } from './components/forgetpass/forgetpass.component';
+import { ChangepasswordComponent } from './components/changepassword/changepassword.component';
 
 @NgModule({
   declarations: [
@@ -81,7 +83,9 @@ import { RegisterActorComponent } from './components/register-actor/register-act
     UserDetailsComponent,
     EditUserComponent,
     AddUserComponent,
-    RegisterActorComponent
+    RegisterActorComponent,
+    ForgetpassComponent,
+    ChangepasswordComponent
   ],
   imports: [
     BrowserModule,

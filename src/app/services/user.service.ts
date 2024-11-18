@@ -53,10 +53,8 @@ export class UserService {
       fData.append("pwd",userObject.pwd);
       fData.append("adress",userObject.adress);
       fData.append("role",userObject.role);
-      fData.append("photo",photo);
-    
-     
-   
+      fData.append("avatar",photo);
+
     }else if(userObject.role=='student'){
     fData.append("firstName",userObject.firstName);
     fData.append("lastName",userObject.lastName);
@@ -65,7 +63,7 @@ export class UserService {
     fData.append("pwd",userObject.pwd);
     fData.append("adress",userObject.adress);
     fData.append("role",userObject.role);
-    fData.append("photo",photo);
+    fData.append("avatar",photo);
 
     }else if(userObject.role=='parent'){
       fData.append("firstName",userObject.firstName);
@@ -76,7 +74,7 @@ export class UserService {
       fData.append("adress",userObject.adress);
       fData.append("role",userObject.role);
       fData.append("telStudent", userObject.telStudent);
-      fData.append("photo",photo);
+      fData.append("avatar",photo);
     }
     return this.httpClient.post<{msg:string}>(`${this.userUrl}`,fData);
   }
@@ -92,9 +90,9 @@ export class UserService {
     fData.append("adress",userObject.adress);
     fData.append("status",userObject.status);
     fData.append("courses",userObject.courses);
-    fData.append("photo",photo);
-    //fData.append("cv",cv);
-    return this.httpClient.post<{msg:string}>(`${this.userUrl}`,fData);
+    fData.append("avatar",photo);
+    fData.append("cvpdf",cv);
+    return this.httpClient.post<{msg:string}>(`${this.userUrl}/adduserteacher`,fData);
   }
  
   // request to Edituser
@@ -109,6 +107,11 @@ export class UserService {
   login(userObject: any) {
     return this.httpClient.post<{msg:string,user:any}>(`${this.userUrl}/login`, userObject);
   }
+  // change mot de pass
+  changePassword(userId: any, oldPassword: string, newPassword: string) {
+    return this.httpClient.put(`${this.userUrl}/change-password`, { userId, oldPassword, newPassword });
+  }
+
   
 }
 

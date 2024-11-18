@@ -10,10 +10,11 @@ const userShema = mongoose.Schema({
     tel: String,
     adress:String,
     pwd:String,
+    specialité:String,
     role:String,
     status:String,
     avatar:String,
-    cv:String,
+    cvpdf:String,
     telStudent:{
         type:mongoose.Schema.Types.ObjectId,
     },

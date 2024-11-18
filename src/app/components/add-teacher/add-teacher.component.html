@@ -59,28 +59,20 @@
                             <select class="form-control mb-3"[(ngModel)]="teacher.courses" [ngModelOptions]="{standalone:true}">
 
                                 <option selected disabled value="">select your specialité</option>
-                                <option *ngFor="let course of tabCourses"   value="{{course._id}}">{{course.name}}</option>
-
-
+                                <option *ngFor="let course of tabCourses"   value="{{course._id}}">{{course.name}}</option>    
+                            
                             </select>
                         </div>
                         
-                        <div class="col-12" style="display:none;">
-                            <input type="file" class="form-control mb-3" #filePicker (change)="selectFile($event)" name="photo">
+                        <div class="col-12" >
+                            <label for="photo">Choose a profile picture:</label>
+                            <input type="file" class="form-control mb-3" accept="image/png, image/jpeg" name="photo" id="photo" (change)="selectPhoto($event)">
                         </div>
-                        <div class="col-12 text-center ">
-                            <button type="button" class="btn btn-primary" (click)="filePicker.click()">select your
-                                photo</button>
+                        
+                        <div class="col-12" >
+                            <label for="cv">Choose a cv :</label>
+                            <input type="file" class="form-control mb-3" accept="application/pdf" name="cv" id="cv" (change)="selectCv($event)">
                         </div>
-                        <div class="col-12" style="display:none;">
-                            <input type="file" class="form-control mb-3" #filePicker (change)="selectFile($event)" name="cv">
-                        </div>
-                       
-                        <div class="col-12 text-center " style="margin-top:10px ;">
-                            <button type="button" class="btn btn-primary" (click)="filePicker.click()">select your
-                                cv</button>
-                        </div>
-
                         <div class="col-12">
                             <button id="submit" type="submit" class="btn btn-primary">ADD</button>
                         </div>

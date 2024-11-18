@@ -5,7 +5,7 @@
       <div class="container">
         <div class="row no-gutters">
           <div class="col-lg-4 text-center text-lg-left">
-            <a class="text-color mr-3" href="callto:+443003030266"><strong>CALL</strong> +44 300 303 0266</a>
+            <a class="text-color mr-3" href="callto:+443003030266"><strong>CALL</strong> +21697960165</a>
             <ul class="list-inline d-inline">
               <li class="list-inline-item mx-0"><a class="d-inline-block p-2 text-color" href="#"><i class="ti-facebook"></i></a></li>
               <li class="list-inline-item mx-0"><a class="d-inline-block p-2 text-color" href="#"><i class="ti-twitter-alt"></i></a></li>
@@ -24,6 +24,7 @@
                 <img width="50px" height="50px" style="border-radius:60%;" src="{{user.img}}" class="logo"></a></li>
               <li *ngIf="isloggedIn()"  class="list-inline-item"><a class="text-uppercase text-color p-sm-2 py-2 px-0 d-inline-block"  >{{user.firstName}}</a></li>
               <li *ngIf="isloggedIn()"  class="list-inline-item"><a class="text-uppercase text-color p-sm-2 py-2 px-0 d-inline-block" routerLink="registerAdmin" (click)="logout()" >logout</a></li>
+              <li *ngIf="isloggedIn()"  class="list-inline-item"><a class="text-uppercase text-color p-sm-2 py-2 px-0 d-inline-block" routerLink="/changepwd/{{user.id}}"  >change password</a></li>
             </ul>
           </div>
         </div>

@@ -27,7 +27,7 @@ export class RegisterTeacherComponent implements OnInit {
       email: ['',[Validators.required,Validators.email]],
       adress: ['',[Validators.required]],
       pwd: ['',[Validators.required,Validators.minLength(6),Validators.maxLength(10)]],
-      specialité: ['',[Validators.required]],
+      courses: ['',[Validators.required]],
     });
     this.courseService.getAllcourses().subscribe((response) => {
       this.tabCourses = response.T;
@@ -48,17 +48,7 @@ export class RegisterTeacherComponent implements OnInit {
           }
       });
     } 
-    
-    this.userservice.addUser(this.signupForm.value,this.photo).subscribe((response) => {
-      console.log("here response after signup", response);
-        if (response.msg=="is added valid") {
-          this.router.navigate(['login']);
-        } else {
-              this.msg='tel exist';
-
-          
-        }
-    });
+  
 
   }
   selectPhoto(event: any) {
@@ -67,7 +57,7 @@ export class RegisterTeacherComponent implements OnInit {
     const inputElement = event.target as HTMLInputElement;
     if (inputElement && inputElement.files && inputElement.files.length > 0) {
       this.photo = inputElement.files[0];
-      //console.log("here file",this.pdf);
+      console.log("photo",this.photo);
     }
 
 
@@ -79,7 +69,7 @@ export class RegisterTeacherComponent implements OnInit {
     const inputElement = event.target as HTMLInputElement;
     if (inputElement && inputElement.files && inputElement.files.length > 0) {
       this.cv = inputElement.files[0];
-      //console.log("here file",this.pdf);
+      console.log("curcum",this.cv);
     }
 
 

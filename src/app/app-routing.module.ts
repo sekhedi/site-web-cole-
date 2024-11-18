@@ -34,6 +34,8 @@ import { AddUserComponent } from './components/add-user/add-user.component';
 import { EditUserComponent } from './components/edit-user/edit-user.component';
 import { UserDetailsComponent } from './components/user-details/user-details.component';
 import { RegisterActorComponent } from './components/register-actor/register-actor.component';
+import { ChangepasswordComponent } from './components/changepassword/changepassword.component';
+
 
 const routes: Routes = [{path:'',component:HomeComponent},
                         {path:'registerParent',component:RegisterParentComponent},
@@ -70,6 +72,8 @@ const routes: Routes = [{path:'',component:HomeComponent},
                         {path:'editUser/:id',component:EditUserComponent},
                         {path:'userDetails/:id',component:UserDetailsComponent},
                         {path:'registerActor',component:RegisterActorComponent},
+                        {path:'changepwd/:id',component:ChangepasswordComponent},
+
                         
 
 ];

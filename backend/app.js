@@ -6,7 +6,7 @@ const bodyParser = require('body-parser');
 const bcrypt = require('bcrypt');
 // import axios
 const axios = require('axios');
-// import
+// import jwt
 const jwt = require('jsonwebtoken');
 const session = require('express-session');
 //import mongoose
@@ -52,6 +52,7 @@ const storageConfig = multer.diskStorage({
   }
 });
 
+
 // Models importaion
 
 const User = require("./models/user");
@@ -88,7 +89,7 @@ app.use((req, res, next) => {
 // BUSINESS LOGIC User Service*****
 
 // business Logic:add User
-app.post("/users", multer({ storage: storageConfig }).single('photo'), (req, res) => {
+app.post("/users", multer({ storage: storageConfig }).single('avatar'),(req, res) => {
   console.log("here into bl:add user", req.body);
   User.findOne({ tel: req.body.tel }).then((doc) => {
     if (doc) {
@@ -111,8 +112,9 @@ app.post("/users", multer({ storage: storageConfig }).single('photo'), (req, res
   });
 });
 // business Logic: add user Teacher
-app.post("/users", multer({ storage: storageConfig }).fields([{name:'photo'},{name:'cv'}]), (req, res) => {
-  console.log("here into bl:add user teacher", req.body);
+app.post("/users/adduserteacher", multer({ storage: storageConfig }).fields([{name:'avatar',maxCount:1}, {name:'cvpdf',maxCount:1}]), (req, res) => {
+  console.log("here into bl:adduserteacher", req.body);
+  console.log("here into bl:adduserteacher", req.files);
   User.findOne({ tel: req.body.tel }).then((doc) => {
     if (doc) {
       res.json({ msg: "user exist" });
@@ -120,14 +122,15 @@ app.post("/users", multer({ storage: storageConfig }).fields([{name:'photo'},{na
     } else {
       bcrypt.hash(req.body.pwd, 10).then((cruptedPwd) => {
         req.body.pwd = cruptedPwd;     
-        if (req.file){
-          if (req.file.mimetype==='application/pdf') {
-            req.body.cv = `http://localhost:3000/shortcut/${req.file.filename}`;
-          } else {
-            req.body.avatar = `http://localhost:3000/shortcut/${req.file.filename}`;
+        if (req.files) {
+          if (req.files.avatar[0]) {
+            req.body.avatar = `http://localhost:3000/shortcut/${req.files.avatar[0].filename}`;
+          }
+
+          if (req.files.cvpdf[0]) {
+            req.body.cvpdf = `http://localhost:3000/shortcut/${req.files.cvpdf[0].filename}`;
           }
         }
-          
         let user = new User(req.body);
         user.save();
         res.json({ msg: "is added valid" });
@@ -155,8 +158,7 @@ app.post("/users/login", (req, res) => {
             firstName: doc.firstName,
             lastName: doc.lastName,
             role: doc.role,
-            img: doc.avatar
-
+            img: doc.avatar,
           }
           let token = jwt.sign(userTosend, secretKey, { expiresIn: '1h' })
           console.log("here token", token);
@@ -169,6 +171,35 @@ app.post("/users/login", (req, res) => {
     }
   });
 
+});
+// business logic:changement mot de pass
+app.put('/users/change-password', async (req, res) => {
+  try {
+    const { userId, oldPassword, newPassword } = req.body;
+
+    // Vérifiez si l'utilisateur existe
+    const user = await User.findById(userId);
+    if (!user) {
+      return res.status(404).json({ msg: 'Utilisateur non trouvé' });
+    }
+
+    // Vérifiez si l'ancien mot de passe est correct
+    const isMatch = await bcrypt.compare(oldPassword, user.pwd);
+    if (!isMatch) {
+      return res.status(400).json({ msg: 'Ancien mot de passe incorrect'});
+    }
+         // Hachez le nouveau mot de passe
+    const hashedPassword = await bcrypt.hash(newPassword, 10);
+
+    // Mettez à jour le mot de passe
+    user.pwd = hashedPassword;
+    await user.save();
+
+    res.status(200).json({ msg: 'Mot de passe modifié avec succès' });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ msg: 'Erreur lors du changement de mot de passe' });
+  }
 });
 // business Logic:validate user by id
 app.put("/users/:id", (req, res) => {

@@ -32,21 +32,28 @@ export class AddTeacherComponent implements OnInit {
 
     });
   }
-  selectFile(event: any) {
+  selectPhoto(event: any) {
 
     // const file = (event.target as HTMLInputElement).files[0];
     const inputElement = event.target as HTMLInputElement;
     if (inputElement && inputElement.files && inputElement.files.length > 0) {
-      
       this.photo = inputElement.files[0];
-      this.cv = inputElement.files[1];
-      console.log("here file",this.photo);
-      console.log("here file",this.cv);
+      //console.log("here file",this.pdf);
     }
 
 
   }
   
+  selectCv(event: any) {
+
+    // const file = (event.target as HTMLInputElement).files[0];
+    const inputElement = event.target as HTMLInputElement;
+    if (inputElement && inputElement.files && inputElement.files.length > 0) {
+      this.cv = inputElement.files[0];
+      //console.log("here file",this.pdf);
+    }
+  
  
 
+}
 }
