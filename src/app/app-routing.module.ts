@@ -35,6 +35,12 @@ import { EditUserComponent } from './components/edit-user/edit-user.component';
 import { UserDetailsComponent } from './components/user-details/user-details.component';
 import { RegisterActorComponent } from './components/register-actor/register-actor.component';
 import { ChangepasswordComponent } from './components/changepassword/changepassword.component';
+import { ForgetpassComponent } from './components/forgetpass/forgetpass.component';
+import { AddEventComponent } from './components/add-event/add-event.component';
+import { TabEventComponent } from './components/tab-event/tab-event.component';
+import { TabcontactComponent } from './components/tabcontact/tabcontact.component';
+import { TabNoteComponent } from './components/tab-note/tab-note.component';
+import { NoteComponent } from './components/note/note.component';
 
 
 const routes: Routes = [{path:'',component:HomeComponent},
@@ -73,6 +79,14 @@ const routes: Routes = [{path:'',component:HomeComponent},
                         {path:'userDetails/:id',component:UserDetailsComponent},
                         {path:'registerActor',component:RegisterActorComponent},
                         {path:'changepwd/:id',component:ChangepasswordComponent},
+                        {path:'forgotpwd',component:ForgetpassComponent},
+                        {path:'addEvent',component:AddEventComponent},
+                        {path:'tabEvent',component:TabEventComponent},
+                        {path:'tabContact',component:TabcontactComponent},
+                        {path:'tabNote',component:TabNoteComponent},
+                        {path:'Note',component:NoteComponent},
+                        
+                        
 
                         
 

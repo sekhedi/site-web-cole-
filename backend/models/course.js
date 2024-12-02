@@ -1,6 +1,5 @@
 //import mongoose module
 const mongoose = require('mongoose');
-const absence = require('./absence');
 //create course shema
 const courseShema = mongoose.Schema({
     // attr: type

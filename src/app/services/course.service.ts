@@ -19,9 +19,9 @@ export class CourseService {
     fData.append("prix",courseObject.prix);
     fData.append("date",courseObject.date);
     fData.append("description",courseObject.description);
-    //fData.append("users",courseObject.teachers);
-    //fData.append("users",courseObject.students);
-    fData.append("photo",photo);
+    fData.append("users",courseObject.teachers);
+    fData.append("users",courseObject.students);
+    fData.append("avatar",photo);
     return this.httpClient.post<{msg:string}>(this.courseURL,fData);
  }
  //request to delete courseById

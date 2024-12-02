@@ -29,6 +29,7 @@ export class TabUserComponent implements OnInit {
         this.usersTab = data.T;
       });
     });
+    location.reload();
   }
   searchUser(){
     this.userService.searchUser(this.searchForm.value).subscribe((data) => {
@@ -52,7 +53,7 @@ export class TabUserComponent implements OnInit {
     this.userService.validateUserById(id,this.usersTab).subscribe((response) => {
       console.log('is user valid', response);
       });
-  
+    location.reload();
 
   }
 

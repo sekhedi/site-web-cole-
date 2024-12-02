@@ -43,6 +43,11 @@ import { AddUserComponent } from './components/add-user/add-user.component';
 import { RegisterActorComponent } from './components/register-actor/register-actor.component';
 import { ForgetpassComponent } from './components/forgetpass/forgetpass.component';
 import { ChangepasswordComponent } from './components/changepassword/changepassword.component';
+import { AddEventComponent } from './components/add-event/add-event.component';
+import { TabEventComponent } from './components/tab-event/tab-event.component';
+import { TabcontactComponent } from './components/tabcontact/tabcontact.component';
+import { TabNoteComponent } from './components/tab-note/tab-note.component';
+import { NoteComponent } from './components/note/note.component';
 
 @NgModule({
   declarations: [
@@ -85,7 +90,12 @@ import { ChangepasswordComponent } from './components/changepassword/changepassw
     AddUserComponent,
     RegisterActorComponent,
     ForgetpassComponent,
-    ChangepasswordComponent
+    ChangepasswordComponent,
+    AddEventComponent,
+    TabEventComponent,
+    TabcontactComponent,
+    TabNoteComponent,
+    NoteComponent
   ],
   imports: [
     BrowserModule,

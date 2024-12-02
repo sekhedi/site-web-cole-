@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup ,Validators} from '@angular/forms';
 import { Router } from '@angular/router';
+import { jwtDecode } from 'jwt-decode';
 import { UserService } from 'src/app/services/user.service';
 
 @Component({
@@ -12,6 +13,8 @@ export class ChangepasswordComponent implements OnInit {
 
   passwordForm!:FormGroup;
   msg:any;
+  user:any;
+  decoded:any;
   constructor(private formBuilder: FormBuilder, private userService:UserService, private router:Router) { }
 
   ngOnInit(): void {
@@ -22,7 +25,9 @@ export class ChangepasswordComponent implements OnInit {
     });
   }
   changePassword() {
-    const userId = localStorage.getItem('userId'); // Supposons que l'ID utilisateur est stocké localement
+    this.user=sessionStorage.getItem('token');
+    this.decoded=jwtDecode(this.user);
+    const userId =this.decoded.id; // Supposons que l'ID utilisateur est stocké localement
     const oldPassword = this.passwordForm.value.oldPassword;
     const newPassword = this.passwordForm.value.newPassword;
 
@@ -33,12 +38,10 @@ export class ChangepasswordComponent implements OnInit {
     this.userService.changePassword(userId, oldPassword, newPassword).subscribe(
       (response) => {
 
-        //this.msg = response.msg;
+        this.msg = response.msg;
         this.router.navigate(['/login']); // Redirige après modification
       },
-      (error) => {
-        this.msg = error.error.msg;
-      }
+      
     );
   }
 }

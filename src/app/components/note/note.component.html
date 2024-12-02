@@ -1,0 +1,76 @@
+<!-- page title -->
+<section class="page-title-section overlay" data-background="assets/images/backgrounds/page-title.jpg">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8">
+                <ul class="list-inline custom-breadcrumb">
+                    <li class="list-inline-item"><a class="h2 text-primary font-secondary" >Evaluation</a></li>
+
+                </ul>
+                <p class="text-lighten">Our notes offer a good compromise between the continuous assessment favoured
+                    by some universities and the emphasis placed on final exams by others.</p>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- /page title -->
+<div tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content rounded-0 border-0 p-4">
+            <div class="modal-header border-0">
+                <h3>Evaluation</h3>
+
+            </div>
+            <div class="modal-body">
+                <div class="login">
+                    <form action="#" class="row" #evaluationForm="ngForm" (ngSubmit)="addEvaluation()">
+
+                        <div class="col-12">
+                            <input type="" class="form-control mb-3"  [(ngModel)]="evaluation.note" [ngModelOptions]="{standalone:true}" name="signupFName"  placeholder="Note">
+                    
+                        </div>
+                        <div class="col-12">
+                            <textarea class="form-control mb-3"  [(ngModel)]="evaluation.mention" [ngModelOptions]="{standalone:true}" name="signupLName" placeholder="Mention"></textarea>
+                            
+                        </div>
+                       
+                        
+                        
+                        <div class="col-md-12">
+                            <select class="form-control mb-3"[(ngModel)]="evaluation.teachers" [ngModelOptions]="{standalone:true}">
+
+                                <option selected disabled value="">select your teachers</option>
+                                <option *ngFor="let t of tabTeachers "   value="{{t._id}}">{{t.firstName}}</option>
+
+
+                            </select>
+                        </div>
+                        <div class="col-md-12">
+                            <select class="form-control mb-3"[(ngModel)]="evaluation.students" [ngModelOptions]="{standalone:true}">
+
+                                <option selected disabled value="">select your students</option>
+                                <option *ngFor="let student of tabStudents"   value="{{student._id}}">{{student.firstName}}</option>
+
+
+                            </select>
+                        </div>
+                        <div class="col-md-12">
+                            <select class="form-control mb-3"[(ngModel)]="evaluation.courses" [ngModelOptions]="{standalone:true}">
+
+                                <option selected disabled value="">select your courses</option>
+                                <option *ngFor="let course of tabCourses"   value="{{course._id}}">{{course.name}}</option>
+
+
+                            </select>
+                        </div>
+                      
+
+                        <div class="col-12">
+                            <button id="submit" type="submit" class="btn btn-primary">Evaluation</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

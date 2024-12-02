@@ -5,25 +5,19 @@ const noteShema = mongoose.Schema({
     // attr: type
     
     note:String,
-    mension: String,
+    mention: String,
     courses:[
         {
             type:mongoose.Schema.Types.ObjectId,
             ref:"Course" // nom de model 
         }
     ],
-    students:[
+    users:[
         {
             type:mongoose.Schema.Types.ObjectId,
-            ref:"Student" // nom de model 
+            ref:"User" // nom de model 
         }
     ],
-    teachers:[
-        {
-            type:mongoose.Schema.Types.ObjectId,
-            ref:"Teacher" // nom de model 
-        }
-    ]
 });
 // affect model name to shema
 const note = mongoose.model("Note", noteShema);

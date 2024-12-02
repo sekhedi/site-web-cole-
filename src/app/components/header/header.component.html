@@ -66,6 +66,9 @@
                   <a class="dropdown-item"  routerLink="tabParent">tabParents</a>
                   <a class="dropdown-item" routerLink="tabCourse">tabCourses</a>
                   <a class="dropdown-item" routerLink="tabUser">tabUsers</a>
+                  <a class="dropdown-item" routerLink="tabEvent">tabEvents</a>
+                  <a class="dropdown-item" routerLink="tabContact">tabContacts</a>
+                  <a class="dropdown-item" routerLink="tabNote">tabNotes</a>
                 </div>
               </li>
               <li *ngIf="isloggedIn() && user.role=='teacher'" class="nav-item dropdown view" >
@@ -73,8 +76,9 @@
                   DASHBOARD 
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                  <a class="dropdown-item"  routerLink="tabStudent">tabStudents</a>
+                  <a class="dropdown-item"  routerLink="student">Students</a>
                   <a class="dropdown-item" routerLink="tabCourse">tabCourses</a>
+                  <a class="dropdown-item" routerLink="tabNote">tabNotes</a>
                 </div>
               </li>
               <li *ngIf="isloggedIn() && user.role=='parent'" class="nav-item dropdown view" >
@@ -82,10 +86,9 @@
                   DASHBOARD 
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                  <a class="dropdown-item"  routerLink="tabStudent">tabStudents</a>
-                  <a class="dropdown-item" routerLink="tabCourse">tabCourses</a>
-                  <a class="dropdown-item" routerLink="tabAbsence">tabAbsence</a>
-                  <a class="dropdown-item"  routerLink="tabNote">tabNote</a>
+                  <a class="dropdown-item"  routerLink="student">Students</a>
+                  <a class="dropdown-item" routerLink="Absence">Absence</a>
+                  <a class="dropdown-item"  routerLink="tabNote">Notes</a>
                 </div>
               </li>
               <li *ngIf="isloggedIn() && user.role=='student'" class="nav-item dropdown view" >
@@ -93,8 +96,9 @@
                   DASHBOARD 
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                  <a class="dropdown-item"  routerLink="tabNote">tabNote</a>
-                  <a class="dropdown-item" routerLink="tabCourse">tabCourses</a>
+                  <a class="dropdown-item"  routerLink="tabNote">Notes</a>
+                  <a class="dropdown-item" routerLink="Absence">Absences</a>
+  
                   
                 </div>
               </li>

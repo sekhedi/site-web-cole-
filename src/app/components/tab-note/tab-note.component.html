@@ -1,0 +1,53 @@
+
+<!-- page title -->
+<section class="page-title-section overlay" data-background="assets/images/backgrounds/page-title.jpg">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8">
+                <ul class="list-inline custom-breadcrumb">
+                    <li class="list-inline-item"><a class="h2 text-primary font-secondary" >Our
+                            Evaluation</a></li>
+
+                </ul>
+             
+            </div>
+        </div>
+    </div>
+</section>
+<!-- /page title -->
+<section class="section-sm">
+    <div class="container">
+        
+        <!-- contact list -->
+        <div class="row justify-content-center">
+            <!-- contact item -->
+            <div class="col-lg-4 col-sm-6 mb-5" *ngFor="let t of notesTab">
+                <div class="card p-0 border-primary rounded-0 hover-shadow">
+    
+                    <div class="card-body">
+                        
+                        <h4 class="card-title">{{t.note}}</h4>
+                        <p class="card-text mb-4"> {{t.mention}}</p>
+                        <ul class="list-inline mb-2">
+                            <li class="list-inline-item" *ngFor="let elt of t.users">{{elt.firstName}}</li>
+                        </ul>
+                       
+                       
+                        <div class="btn-group btn-group-sm">
+                            <button type="button" class="btn btn-info" (click)="goToEdit(t._id)">EDIT</button>
+                            <button type="button" class="btn btn-danger" (click)="deleteEvaluation(t._id)">DELETE</button>
+                            <button type="button" class="btn btn-warning" (click)="goToAdd()">addEval</button>
+                            
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            
+        </div>
+        <!-- /contact list -->
+
+
+    </div>
+</section>

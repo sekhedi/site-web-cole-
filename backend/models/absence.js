@@ -11,12 +11,12 @@ const absenceShema = mongoose.Schema({
             ref:"Course" // nom de model 
         }
     ],
-    students:[
+    users:[
         {
             type:mongoose.Schema.Types.ObjectId,
-            ref:"Student" // nom de model 
+            ref:"User" // nom de model 
         }
-    ]
+    ],
 });
 // affect model name to shema
 const absence = mongoose.model("Absence", absenceShema);

@@ -104,12 +104,13 @@ export class UserService {
   searchUser(userObject:any){
     return this.httpClient.post<{user:any}>(`${this.userUrl}/tabUser`,userObject);
   }
+  // request to connected
   login(userObject: any) {
     return this.httpClient.post<{msg:string,user:any}>(`${this.userUrl}/login`, userObject);
   }
-  // change mot de pass
-  changePassword(userId: any, oldPassword: string, newPassword: string) {
-    return this.httpClient.put(`${this.userUrl}/change-password`, { userId, oldPassword, newPassword });
+  // request to change password
+  changePassword(userId: any, oldPassword:any, newPassword:any) {
+    return this.httpClient.put<{ msg: string }>(`${this.userUrl}/change-password`, { userId, oldPassword, newPassword });
   }
 
   

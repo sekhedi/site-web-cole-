@@ -59,7 +59,8 @@ const User = require("./models/user");
 const Course = require("./models/course");
 const Absence = require("./models/absence");
 const Note = require("./models/note");
-const contact = require("./models/contact");
+const Contact = require("./models/contact");
+const Event = require("./models/event");
 // Security configuration
 
 app.use((req, res, next) => {
@@ -172,35 +173,45 @@ app.post("/users/login", (req, res) => {
   });
 
 });
-// business logic:changement mot de pass
-app.put('/users/change-password', async (req, res) => {
+// business logic:change password
+app.put("/users/change-password", async (req, res) => {
   try {
     const { userId, oldPassword, newPassword } = req.body;
+
+    // Vérifiez si les données nécessaires sont fournies
+    if (!userId || !oldPassword || !newPassword) {
+      return res.status(400).json({ msg: "Tous les champs sont obligatoires" });
+    }
+
+    console.log("Données reçues :", req.body);
 
     // Vérifiez si l'utilisateur existe
     const user = await User.findById(userId);
     if (!user) {
-      return res.status(404).json({ msg: 'Utilisateur non trouvé' });
+      return res.status(404).json({ msg: "Utilisateur non trouvé" });
     }
 
     // Vérifiez si l'ancien mot de passe est correct
     const isMatch = await bcrypt.compare(oldPassword, user.pwd);
     if (!isMatch) {
-      return res.status(400).json({ msg: 'Ancien mot de passe incorrect'});
+      return res.status(400).json({ msg: "Ancien mot de passe incorrect" });
     }
-         // Hachez le nouveau mot de passe
+
+    // Hachez le nouveau mot de passe
     const hashedPassword = await bcrypt.hash(newPassword, 10);
 
     // Mettez à jour le mot de passe
     user.pwd = hashedPassword;
     await user.save();
 
-    res.status(200).json({ msg: 'Mot de passe modifié avec succès' });
+    res.status(200).json({ msg: "Mot de passe modifié avec succès" });
   } catch (error) {
-    console.error(error);
-    res.status(500).json({ msg: 'Erreur lors du changement de mot de passe' });
+    console.error("Erreur :", error);
+    res.status(500).json({ msg: "Erreur lors du changement de mot de passe" });
   }
 });
+// business Logic :forgot password
+
 // business Logic:validate user by id
 app.put("/users/:id", (req, res) => {
   console.log("here into bl: validate user by id", req.params.id);
@@ -336,18 +347,18 @@ app.delete("/courses/:id", async (req, res) => {
   };
 });
 // business Logic:add course
-app.post("/courses", multer({ storage: storageConfig }).single('photo'), (req, res) => {
+app.post("/courses", multer({ storage: storageConfig }).single('avatar'), (req, res) => {
   console.log("here into bl:add course", req.body);
   Course.findOne({ name: req.body.name }).then((doc) => {
     if (doc) {
-      res.json({ msg: "number phone exist" });
+      res.json({ msg: "name course exist" });
     } else {
       (req.file) ?
         req.body.avatar = `http://localhost:3000/shortcut/${req.file.filename}` :
         req.body.avatar = `http://localhost:3000/shortcut/avatar.png`;
       let course = new Course(req.body);
       course.save();
-      res.json({ msg: "is added valid" });
+      res.json({ msg: "is added course valid" });
     }
   });
 
@@ -375,6 +386,150 @@ app.post("/courses/tabCourse", (req, res) => {
 
 });
 
-//BUSINESS LOGIC contact Service*****
+//BUSINESS LOGIC event  Service*****
+
+// business Logic:add event
+app.post("/events", multer({ storage: storageConfig }).single('avatar'), (req, res) => {
+  console.log("here into bl:add event", req.body);
+  Event.findOne({ name: req.body.name }).then((doc) => {
+    if (doc) {
+      res.json({ msg: "name event exist" });
+    } else {
+      (req.file) ?
+        req.body.avatar = `http://localhost:3000/shortcut/${req.file.filename}` :
+        req.body.avatar = `http://localhost:3000/shortcut/avatar.png`;
+      let event = new Event(req.body);
+      event.save();
+      res.json({ msg: "is added event valid" });
+    }
+  });
+
+});
+// business logic: delete event
+app.delete("/events/:id", async (req, res) => {
+  try {
+    console.log("here into bl:delete event by id", req.params.id);
+    await Event.deleteOne({ _id: req.params.id }).then((result) => {
+      console.log("here after", result)
+      if (result.deletedCount == 1) {
+        res.json({ msg: " delete ok" });
+      } else {
+        res.json({ msg: " delete not ok" });
+      }
+    });
+  }
+  catch (err) {
+    console.log(err);
+  };
+});
+// business Logic:Get All events
+app.get("/events", (req, res) => {
+  console.log("here into bl:get all events ", req.body);
+  Event.find().then(
+    (docs) => {
+      res.json({ T: docs });
+    });
+
+});
+// business Logic:edit event
+app.put("/events", (req, res) => {
+  Event.updateOne({ _id: req.body._id }, req.body).then((result) => {
+    console.log("update", result)
+    if (nModified == 1) {
+      res.json({ msg: " update ok" });
+    } else {
+      res.json({ msg: " update not ok" });
+
+    }
+  });
+
+});
+//BUSINESS LOGIC contact  Service*****
+
+// business Logic:add contact
+app.post("/contacts",  (req, res) => {
+  console.log("here into bl:add contact", req.body);
+ 
+  let contact = new Contact(req.body);
+  contact.save();
+  res.json({ msg: "is send message valid" });
+});
+// business Logic:Get All contacts
+app.get("/contacts", (req, res) => {
+  console.log("here into bl:get all contacts ", req.body);
+  Contact.find().then(
+    (docs) => {
+      res.json({ T: docs });
+    });
+
+});
+// business logic: delete contact
+app.delete("/contacts/:id", async (req, res) => {
+  try {
+    console.log("here into bl:delete event by id", req.params.id);
+    await Contact.deleteOne({ _id: req.params.id }).then((result) => {
+      console.log("here after", result)
+      if (result.deletedCount == 1) {
+        res.json({ msg: " delete ok" });
+      } else {
+        res.json({ msg: " delete not ok" });
+      }
+    });
+  }
+  catch (err) {
+    console.log(err);
+  };
+});
+//BUSINESS LOGIC note  Service*****
+
+// business Logic:add note
+app.post("/notes",  (req, res) => {
+  console.log("here into bl:add note", req.body);
+  let note = new Note(req.body);
+  note.users = note.users.concat(req.body.students);
+  note.users = note.users.concat(req.body.teachers);
+  note.save();
+  res.json({ msg: "is add note valid" });
+});
+// business logic: delete note
+app.delete("/notes/:id", async (req, res) => {
+  try {
+    console.log("here into bl:delete note by id", req.params.id);
+    await Note.deleteOne({ _id: req.params.id }).then((result) => {
+      console.log("here after", result)
+      if (result.deletedCount == 1) {
+        res.json({ msg: " delete ok" });
+      } else {
+        res.json({ msg: " delete not ok" });
+      }
+    });
+  }
+  catch (err) {
+    console.log(err);
+  };
+});
+// business Logic:edit note
+app.put("/notes", (req, res) => {
+  Note.updateOne({ _id: req.body._id }, req.body).then((result) => {
+    console.log("update", result)
+    if (nModified == 1) {
+      res.json({ msg: " update ok" });
+    } else {
+      res.json({ msg: " update not ok" });
+
+    }
+  });
+
+});
+// business Logic:Get All notes
+app.get("/notes", (req, res) => {
+  console.log("here into bl:get all notes ", req.body);
+  Note.find().populate("users").then(
+    (docs) => {
+      res.json({ T: docs });
+    });
+
+});
+
 //make app importable from another files
 module.exports = app;
